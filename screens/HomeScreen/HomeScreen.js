@@ -2,6 +2,7 @@ import React from 'react';
 import {View, Text, Dimensions, StyleSheet, ScrollView} from 'react-native';
 import { MapView, Location, Permissions } from 'expo';
 import { Container, Content, Button } from 'native-base';
+import { TopNavigation } from '../../navigation/index.js';
 
 let width = Dimensions.get('window').width;
 let height = Dimensions.get('window').height;
@@ -15,6 +16,10 @@ export default class HomeScreen extends React.Component {
             location: {coords: { latitude: 29.424349, longitude: -98.491142}},
         }
     }
+
+    static navigationOptions = {
+        title: 'Home'
+    };
 
     componentDidMount() {
         this._getLocationAsync();
@@ -36,7 +41,8 @@ export default class HomeScreen extends React.Component {
     render() {
 
         return (
-            <Container>
+            <Container style={{paddingTop: 24}}>
+                <TopNavigation navigation={this.props.navigation}/>
                 <Content style={{flex: 1}}>
                     <MapView
                         style={{width: width, height: height}}
@@ -45,7 +51,7 @@ export default class HomeScreen extends React.Component {
                         <MapView.Marker coordinate={this.state.location.coords} title={"Current Location"} />
                     </MapView>
                     <View style={[styles.mapButtons]}>
-                        <Button style={[styles.mapLeftButton]}>
+                        <Button onPress={() => {this.props.navigation.navigate('Profile')}} style={[styles.mapLeftButton]}>
                             <Text style={{fontWeight: 'bold'}}>ESCORT</Text>
                         </Button>
                         <Button style={[styles.mapRightButton]}>

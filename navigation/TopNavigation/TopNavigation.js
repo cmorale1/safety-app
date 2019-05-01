@@ -1,33 +1,20 @@
 import React from 'react';
 import { Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
-import {StyleSheet} from 'react-native';
-import { createDrawerNavigator, createAppContainer } from 'react-navigation';
-import { HomeScreen, ProfileScreen } from '../../screens/index.js';
+import {StyleSheet, Text} from 'react-native';
 
-const MainNavigator = createDrawerNavigator({
-    Home: {
-        screen: HomeScreen
-    },
-    Profile: {
-        screen: ProfileScreen
-    }
-}, {
-    initialRouteName: 'Home'
-});
-
-const App = createAppContainer(MainNavigator);
-
-export class TopNavigation extends React.Component {
+export default class TopNavigation extends React.Component {
     render() {
         return (
             <Header style={[styles.header]}>
                 <Left style={{flex: 1}}>
-                    <Button transparent>
+                    <Button transparent onPress={() => {
+                        this.props.navigation.toggleDrawer();
+                    }}>
                         <Icon style={{color: "white"}} name='menu' />
                     </Button>
                 </Left>
                 <Body style={{flex: 1}}>
-                    <Title style={[styles.headerText]}>SAFETY APP</Title>
+                    <Text style={[styles.headerText]}>SAFETY APP</Text>
                 </Body>
                 <Right>
                     <Icon style={{color: "white"}} name='cog' />
@@ -39,7 +26,7 @@ export class TopNavigation extends React.Component {
 
 const styles = StyleSheet.create({
     header: {
-        backgroundColor: 'red'
+        backgroundColor: 'red',
     },
     headerText: {
         color: 'white',
