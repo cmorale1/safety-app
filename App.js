@@ -23,7 +23,7 @@ export default class App extends React.Component {
         } else {
             return (
                 <Container style={{paddingTop: 24}}>
-                    <TopNavigation/>
+                    <TopNavigation navigation={this.props.navigation}/>
                     <Content>
                         <HomeScreen/>
                     </Content>

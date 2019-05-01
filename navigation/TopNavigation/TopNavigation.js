@@ -1,8 +1,23 @@
 import React from 'react';
 import { Header, Left, Body, Right, Button, Icon, Title } from 'native-base';
 import {StyleSheet} from 'react-native';
+import { createDrawerNavigator, createAppContainer } from 'react-navigation';
+import { HomeScreen, ProfileScreen } from '../../screens/index.js';
 
-export default class TopNavigation extends React.Component {
+const MainNavigator = createDrawerNavigator({
+    Home: {
+        screen: HomeScreen
+    },
+    Profile: {
+        screen: ProfileScreen
+    }
+}, {
+    initialRouteName: 'Home'
+});
+
+const App = createAppContainer(MainNavigator);
+
+export class TopNavigation extends React.Component {
     render() {
         return (
             <Header style={[styles.header]}>
@@ -31,4 +46,3 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     }
 });
-
