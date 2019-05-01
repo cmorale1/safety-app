@@ -1,21 +1,51 @@
 import React from 'react';
 import {View, Text, Dimensions, StyleSheet, ScrollView} from 'react-native';
-import { MapView } from 'expo';
+import { MapView, Location, Permissions } from 'expo';
 import { Container, Content, Button } from 'native-base';
 
 let width = Dimensions.get('window').width;
 let height = Dimensions.get('window').height;
 
+export const getCurrentLocation = () => {
+    return new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(position => resolve(position), e => reject(e));
+    });
+};
+
+
 export default class HomeScreen extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            region: { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 },
+        }
+    }
+
+    componentWillMount() {
+        return getCurrentLocation().then(position => {
+            if (position) {
+                this.setState({
+                    region: {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                        latitudeDelta: 0.003,
+                        longitudeDelta: 0.003,
+                    },
+                });
+            }
+        });
+    }
+
     render() {
+
         return (
             <Container>
                 <Content style={{flex: 1}}>
                     <MapView
                         style={{width: width, height: height}}
                         initialRegion={{
-                            latitude: 37.78825,
-                            longitude: -122.4324,
+                            latitude: this.state.region.latitude,
+                            longitude: this.state.region.longitude,
                             latitudeDelta: 0.0922,
                             longitudeDelta: 0.0421,
                         }}
