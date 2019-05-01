@@ -7,10 +7,10 @@ export default class BottomNavigation extends React.Component {
         return (
             <FooterTab style={[styles.footer]}>
                 <Button vertical>
-                    <Text style={[styles.footerText]}>Home</Text>
+                    <Text style={[styles.footerText]}>Map</Text>
                 </Button>
                 <Button vertical>
-                    <Text style={[styles.footerText]}>Safety</Text>
+                    <Text style={[styles.footerText]}>Report</Text>
                 </Button>
             </FooterTab>
         );
