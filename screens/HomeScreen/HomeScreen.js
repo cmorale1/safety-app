@@ -6,35 +6,32 @@ import { Container, Content, Button } from 'native-base';
 let width = Dimensions.get('window').width;
 let height = Dimensions.get('window').height;
 
-export const getCurrentLocation = () => {
-    return new Promise((resolve, reject) => {
-        navigator.geolocation.getCurrentPosition(position => resolve(position), e => reject(e));
-    });
-};
-
-
 export default class HomeScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            region: { latitude: 37.78825, longitude: -122.4324, latitudeDelta: 0.0922, longitudeDelta: 0.0421 },
+            mapRegion: { latitude: 29.424349, longitude: -98.491142, latitudeDelta: 0.0922, longitudeDelta: 0.0421 },
+            locationResult: null,
+            location: {coords: { latitude: 29.424349, longitude: -98.491142}},
         }
     }
 
-    componentWillMount() {
-        return getCurrentLocation().then(position => {
-            if (position) {
-                this.setState({
-                    region: {
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                        latitudeDelta: 0.003,
-                        longitudeDelta: 0.003,
-                    },
-                });
-            }
-        });
+    componentDidMount() {
+        this._getLocationAsync();
     }
+
+    _getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== 'granted') {
+            this.setState({
+                locationResult: 'Permission to access location was denied',
+                location,
+            });
+        }
+
+        let location = await Location.getCurrentPositionAsync({});
+        this.setState({ locationResult: JSON.stringify(location), location, });
+    };
 
     render() {
 
@@ -43,13 +40,10 @@ export default class HomeScreen extends React.Component {
                 <Content style={{flex: 1}}>
                     <MapView
                         style={{width: width, height: height}}
-                        initialRegion={{
-                            latitude: this.state.region.latitude,
-                            longitude: this.state.region.longitude,
-                            latitudeDelta: 0.0922,
-                            longitudeDelta: 0.0421,
-                        }}
-                    />
+                        region={{ latitude: this.state.location.coords.latitude, longitude: this.state.location.coords.longitude, latitudeDelta: 0.008, longitudeDelta: 0.008 }}
+                    >
+                        <MapView.Marker coordinate={this.state.location.coords} title={"Current Location"} />
+                    </MapView>
                     <View style={[styles.mapButtons]}>
                         <Button style={[styles.mapLeftButton]}>
                             <Text style={{fontWeight: 'bold'}}>ESCORT</Text>
