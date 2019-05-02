@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, Dimensions, StyleSheet, ScrollView} from 'react-native';
 import { MapView, Location, Permissions } from 'expo';
-import { Container, Content, Button } from 'native-base';
-import { TopNavigation } from '../../navigation/index.js';
+import { Container, Content, Button, Footer } from 'native-base';
+import { TopNavigation, BottomNavigation } from '../../navigation/index.js';
 
 let width = Dimensions.get('window').width;
 let height = Dimensions.get('window').height;
@@ -59,6 +59,9 @@ export default class HomeScreen extends React.Component {
                         </Button>
                     </View>
                 </Content>
+                <Footer>
+                    <BottomNavigation navigation={this.props.navigation}/>
+                </Footer>
             </Container>
         )
     }

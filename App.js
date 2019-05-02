@@ -13,6 +13,21 @@ const navigator = createDrawerNavigator( {
     Profile: {
         screen: ProfileScreen
     },
+    Settings: {
+        screen: ProfileScreen
+    },
+    Help: {
+        screen: ProfileScreen
+    },
+    Share: {
+        screen: ProfileScreen
+    },
+    Terms_of_Use: {
+        screen: ProfileScreen
+    },
+    Privacy_Policy: {
+        screen: ProfileScreen
+    }
 }, {
     // drawerType: 'back',
     // drawerPosition: 'right',
