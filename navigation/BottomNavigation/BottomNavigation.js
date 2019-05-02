@@ -15,6 +15,9 @@ export default class BottomNavigation extends React.Component {
                 <Button vertical bordered full>
                     <Text style={[styles.footerText]}>Alerts</Text>
                 </Button>
+                <Button vertical bordered full>
+                    <Text style={[styles.footerText]}>Contacts</Text>
+                </Button>
             </FooterTab>
         );
     }
@@ -22,8 +25,8 @@ export default class BottomNavigation extends React.Component {
 
 const styles = StyleSheet.create({
     footer: {
-        backgroundColor: '#fff',
-        flexDirection: 'row'
+        backgroundColor: 'yellow',
+        flexDirection: 'row',
     },
     footerText: {
         color: '#ff6700',

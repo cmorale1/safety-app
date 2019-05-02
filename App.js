@@ -3,7 +3,7 @@ import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
 import { AppLoading, Asset, Font } from 'expo';
 import { createDrawerNavigator, createAppContainer, DrawerItems, SafeAreaView } from 'react-navigation';
 import { Container, Content, Footer } from 'native-base';
-import { HomeScreen, ProfileScreen } from './screens/index.js';
+import { HomeScreen, ProfileScreen, AlertScreen } from './screens/index.js';
 import { TopNavigation, BottomNavigation } from './navigation/index.js';
 
 const navigator = createDrawerNavigator( {
@@ -12,6 +12,9 @@ const navigator = createDrawerNavigator( {
     },
     Profile: {
         screen: ProfileScreen
+    },
+    Alerts: {
+        screen: AlertScreen
     },
     Settings: {
         screen: ProfileScreen
@@ -30,9 +33,6 @@ const navigator = createDrawerNavigator( {
     }
 }, {
     drawerType: 'back',
-    // drawerPosition: 'right',
-    // drawerWidth: 200,
-    // drawerBackgroundColor: 'orange',
 });
 
 export default createAppContainer(navigator);
