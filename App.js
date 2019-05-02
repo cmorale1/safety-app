@@ -29,7 +29,7 @@ const navigator = createDrawerNavigator( {
         screen: ProfileScreen
     }
 }, {
-    // drawerType: 'back',
+    drawerType: 'back',
     // drawerPosition: 'right',
     // drawerWidth: 200,
     // drawerBackgroundColor: 'orange',
